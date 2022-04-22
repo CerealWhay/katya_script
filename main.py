@@ -1,12 +1,28 @@
-import asyncio
+import random
+
+import requests
+import time
+from datetime import datetime
 from pyrogram import Client
 
-api_id = 13169928
-api_hash = 'a41b48c9f67965cf8b621e3046bb06dc'
+app = Client("my_account")
+TARGET_USER = 'lkatekk'
 
 
-async def main():
-    async with Client("my_account", api_id, api_hash) as app:
-        await app.send_message("autist_mylive", "Greetings from **Pyrogram**!")
+def get_datetime():
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    return dt_string
 
-asyncio.run(main())
+
+async def send_photo(cat_img):
+    async with app:
+        await app.send_photo(TARGET_USER, cat_img)
+        print(f'sent {cat_img} in {get_datetime()}')
+
+
+while True:
+    r = requests.get('https://api.thecatapi.com/v1/images/search?mime_types=png,jpg')
+    img = r.json()[0]['url']
+    app.run(send_photo(img))
+    time.sleep(random.randrange(1800, 10800))
