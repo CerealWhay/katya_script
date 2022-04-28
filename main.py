@@ -7,8 +7,8 @@ from pyrogram import Client
 app = Client("my_account")
 TARGET_USER = 'lkatekk'
 CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=png,jpg'
-MIN_TIME = 1800  # in sec
-MAX_TIME = 10800  # in sec
+MIN_TIME = 21600  # in sec
+MAX_TIME = 43200  # in sec
 
 
 def get_datetime():
